@@ -18,18 +18,23 @@
     <div class="container mt-5">
         <h1 class="mb-4">Film List</h1>
         <div class="row">
-
-            @foreach ($data as $film)
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="{{ isset($film['thumb']) ? $film['thumb'] : '' }}" class="card-img-top" alt="Film Image">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ isset($film['title']) ? $film['title'] : 'No Title Available' }}</h5>
+            @forelse ($datas['ongoing'] as $film)
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="{{ $film['thumb'] }}" class="card-img-top" alt="{{ $film['title'] }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $film['title'] }}</h5>
+                            <p class="card-text">Total Episode: {{ $film['total_episode'] }}</p>
+                            <p class="card-text">Updated On: {{ $film['updated_on'] }}</p>
+                            <a href="{{ $film['endpoint'] }}" class="btn btn-primary">View Details</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
-            
+            @empty
+                <p>No films available.</p>
+            @endforelse
+        </div>
     </div>
 </body>
 </html>
+
